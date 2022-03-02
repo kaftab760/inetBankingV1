@@ -1,0 +1,11 @@
+testCases\TC_AddCustomerTest_003.class
+pageObjects\EditCustomerPage.class
+base\BaseClass.class
+pageObjects\LoginPage.class
+testCases\TC_LoginTest_001.class
+utilities\ULUtils.class
+testCases\TC_EditCustomerTest_004.class
+utilities\Reporting.class
+testCases\TC_LoginDDT_002.class
+pageObjects\AddCustomerPage.class
+utilities\ReadConfig.class
