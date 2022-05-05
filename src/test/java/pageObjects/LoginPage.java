@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import utilities.BasicFunctions;
+
 public class LoginPage {
 
 	WebDriver driver = null;
@@ -13,35 +15,34 @@ public class LoginPage {
 	By text_Password = By.name("password");
 	By button_Login = By.name("btnLogin");
 	By button_Reset = By.name("btnReset");
-	By button_Logout=By.xpath("//a[@href='Logout.php']");
+	By button_Logout = By.xpath("//a[@href='Logout.php']");
+	
+	BasicFunctions base=new BasicFunctions();
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 	}
 
 	public void setUserName(String text) {
-		driver.findElement(text_UserName).sendKeys(text);
-
+		base.setText(text_UserName, text);
 	}
 
 	public void setPassword(String text) {
-		driver.findElement(text_Password).sendKeys(text);
-
+		base.setText(text_Password, text);
 	}
 
 	public void clickLoginButton() {
-		driver.findElement(button_Login).click();
+		base.Click(button_Login);
 	}
 
 	public void clickResetButton() {
-		driver.findElement(button_Reset).click();
+		base.Click(button_Reset);
 	}
-	
+
 	public void clickLogoutButton() {
-		
-		Actions action=new Actions(driver);
+		Actions action = new Actions(driver);
 		action.moveToElement(driver.findElement(button_Logout)).perform();
-		driver.findElement(button_Logout).click();
-		
+		base.Click(button_Logout);
+
 	}
 }

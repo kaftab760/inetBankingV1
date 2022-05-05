@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import utilities.BasicFunctions;
+
 public class AddCustomerPage {
 
 	WebDriver driver = null;
@@ -22,69 +24,65 @@ public class AddCustomerPage {
 	By button_Submit = By.name("sub");
 	By button_Reset = By.name("res");
 
+	BasicFunctions base = new BasicFunctions();
+
 	public AddCustomerPage(WebDriver driver) {
 		this.driver = driver;
 	}
 
 	public void clickAddNewCustomer() {
-		driver.findElement(link_AddNewCustomer).click();
+		base.Click(link_AddNewCustomer);
 	}
 
 	public void customerName(String cname) {
-		driver.findElement(text_CustomerName).sendKeys(cname);
+		base.setText(text_CustomerName, cname);
 	}
 
 	public void customerGender(String cgender) {
-		driver.findElement(rd_Gender).click();
+		base.Click(rd_Gender);
 	}
 
 	public void customerDOB(String mm, String dd, String yy) {
-		driver.findElement(text_dob).sendKeys(mm);
-		driver.findElement(text_dob).sendKeys(dd);
-		driver.findElement(text_dob).sendKeys(yy);
+		base.setText(text_dob, mm);
+		base.setText(text_dob, dd);
+		base.setText(text_dob, yy);
 
 	}
 
 	public void customerAddress(String caddress) {
-
-		driver.findElement(text_Address).sendKeys(caddress);
+		base.setText(text_Address, caddress);
 	}
 
 	public void customerCity(String ccity) {
-
-		driver.findElement(text_City).sendKeys(ccity);
+		base.setText(text_City, ccity);
 	}
 
 	public void customerState(String cstate) {
-
-		driver.findElement(text_State).sendKeys(cstate);
+		base.setText(text_State, cstate);
 	}
-	
+
 	public void customerPIN(String cpin) {
-
-		driver.findElement(text_PIN).sendKeys(String.valueOf(cpin));
+		base.setText(text_PIN, String.valueOf(cpin));
 	}
-	
+
 	public void customerPhoneNum(String cphn) {
-
-		driver.findElement(text_PhoneNum).sendKeys(cphn);
+		base.setText(text_PhoneNum, cphn);
 	}
-	
-	public void customerEmail(String cemail) {
 
-		driver.findElement(text_Email).sendKeys(cemail);
+	public void customerEmail(String cemail) {
+		base.setText(text_Email, cemail);
 	}
 
 	public void customerPassword(String cpass) {
+		base.setText(text_Password, cpass);
+	}
 
-		driver.findElement(text_Password).sendKeys(cpass);
-	}
 	public void clickSubmitButton() {
-		
-		driver.findElement(button_Submit).click();	
+		base.Click(button_Submit);
 	}
-	
+
 	public void clickResetButton() {
-		driver.findElement(button_Reset).click();
+		base.Click(button_Reset);
+		
 	}
 }

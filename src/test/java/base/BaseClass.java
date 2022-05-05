@@ -3,6 +3,8 @@ package base;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +41,7 @@ public class BaseClass {
 		if (driver == null) {
 
 			logger = LogManager.getLogger(BaseClass.class.getName());
+						
 			readconfig = new ReadConfig();
 
 			baseURL = readconfig.getApplicationURL();
@@ -71,17 +74,23 @@ public class BaseClass {
 	@AfterClass
 	public void tearDown() throws InterruptedException {
 
-		driver.close();
+//		driver.close();
 		System.out.println("Teardown Successful");
 		driver = null;
 	}
 
-	public void captureScreen(WebDriver driver, String tname) throws IOException {
-		TakesScreenshot ts = (TakesScreenshot) driver;
-		File source = ts.getScreenshotAs(OutputType.FILE);
-		File target = new File(System.getProperty("user.dir") + "/Screenshots/" + tname + ".png");
-		FileUtils.copyFile(source, target);
+	public static String captureScreen(WebDriver driver, String screenshotName) throws IOException {
+		String dateName=new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		TakesScreenshot ts=(TakesScreenshot) driver;
+		File source=ts.getScreenshotAs(OutputType.FILE);
+		
+		
+		String destination=System.getProperty("user.dir")+"/ScreenShots/"+screenshotName+dateName+".png";
+		File finaldestination=new File (destination);
+		FileUtils.copyFile(source, finaldestination);
 		System.out.println("Screenshot taken");
+		return destination;
+		
 	}
 
 	public String randomstring() {
@@ -98,3 +107,7 @@ public class BaseClass {
 
 	}
 }
+
+
+//	System.getProperty("user.dir")  Give you system home directory: Only can be used in Java Classes
+// ./ : Can be used in Java classes and in properties file 

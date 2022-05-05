@@ -5,9 +5,9 @@
     <classes>
       <class name="testCases.TC_LoginTest_001">
         <methods>
-          <include name="setUp"/>
           <include name="tearDown"/>
           <include name="loginTest"/>
+          <include name="setUp"/>
         </methods>
       </class> <!-- testCases.TC_LoginTest_001 -->
     </classes>

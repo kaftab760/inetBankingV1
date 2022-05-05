@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.testng.ITestContext;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import com.aventstack.extentreports.ExtentReports;
@@ -16,7 +17,9 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-public class Reporting extends TestListenerAdapter {
+import base.BaseClass;
+
+public class Reporting extends BaseClass implements ITestListener {
 	public ExtentReports extent;
 	public ExtentSparkReporter spark;
 	public ExtentTest test;
@@ -60,14 +63,22 @@ public class Reporting extends TestListenerAdapter {
 		test = extent.createTest(tr.getName());
 		test.log(Status.FAIL, MarkupHelper.createLabel(tr.getName(), ExtentColor.RED));
 
-		String screenshotPath = System.getProperty("user.dir") + "\\Screenshots\\" + tr.getName() + ".png";
+		String screenshotPath;
+		try {
+			screenshotPath = captureScreen(driver,tr.getName());
+			File f = new File(screenshotPath);
+			if (f.exists()) {
+				test.fail("Screenshot is below:" + test.addScreenCaptureFromPath(screenshotPath));
 
-		File f = new File(screenshotPath);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 
-		if (f.exists()) {
-			test.fail("Screenshot is below:" + test.addScreenCaptureFromPath(screenshotPath));
+		
 
-		}
+		
 	}
 
 	public void onTestSkipped(ITestResult tr) {

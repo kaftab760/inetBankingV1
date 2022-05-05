@@ -1,6 +1,7 @@
 package utilities;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.util.Properties;
 
@@ -11,12 +12,12 @@ public class ReadConfig
 	
 	public ReadConfig()
 	{
-		File src=new File("C:\\eclipse-workspace\\inetBankingV1\\Configuration\\config.properties");
+		File src=new File(System.getProperty("user.dir")+"\\Configuration\\config.properties"); // 1:Path of config.properties file
 		
 		try {
-			FileReader fr = new FileReader(src);
-			prop = new Properties();
-			prop.load(fr);
+			FileInputStream fr = new FileInputStream(src); // 2:Create an object of FileInputStream using config.properties
+			prop = new Properties();             // 3:Create an Object of Properties 
+			prop.load(fr);						 // 4:Load the complete file 
 			
 		}catch (Exception e)
 		{
@@ -26,7 +27,7 @@ public class ReadConfig
 	
 	public String getApplicationURL()
 	{
-		String url=prop.getProperty("testurl");
+		String url=prop.getProperty("testurl");               //Get the value of the variable 
 		
 		return url;
 	}
